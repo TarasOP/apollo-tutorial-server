@@ -55,14 +55,11 @@ module.exports = {
    * User resolver
    */
   User: {
-    trips: (_, __, { dataSources }) => {
-      const launchIds = dataSources.userApi.getLaunchIdsByUser();
+    trips: async (_, __, { dataSources, user }) => {
+      const launchIds = await dataSources.userApi.getLaunchIdsByUser();
+      const launches = await dataSources.launchApi.getLaunchesByIds({launchIds});
       if (!launchIds.length) return [];
-      return (
-        dataSources.launchAPI.getLaunchesByIds({
-          launchIds,
-        }) || []
-      );
+      return  launches 
     },
   },
 };

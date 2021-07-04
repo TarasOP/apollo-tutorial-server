@@ -23,7 +23,6 @@ module.exports = {
       const launches = await dataSources.launchApi.getLaunchesByIds({
         launchIds,
       });
-      console.log(launches);
       return {
         launches,
         success: results && results.length === launchIds.length,
